@@ -221,6 +221,7 @@ def main():
         cases = phenomize(config_data, cases)
 
     cases=save_vcfs(cases, config_data)
+    convert_to_old_format(args, config_data, cases)
     create_config()
 
 if __name__ == '__main__':

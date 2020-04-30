@@ -25,7 +25,7 @@ rule sort:
     log: "{output}/logs/{sample}/sort.log"
     shell:
         """
-        (cat '{input}' | egrep "^#"; cat '{input}' | egrep -v "^#" | sort -k1,1 -k2,2n) | bgzip -c > '{output}'
+        (cat '{input}' | egrep "^#"; cat '{input}' | egrep -v "^#" | sort -k1,1V -k2,2n) | bgzip -c > '{output}'
         """
 
 rule index_sorted:
@@ -66,7 +66,6 @@ rule annotate:
         db="data/jannovar/data/hg19_refseq.ser",
         exac="data/populationDBs/ExAC.r1.sites.vep.vcf.gz",
         uk="data/populationDBs/UK10K_COHORT.20160215.sites.vcf.gz",
-        #dbsnp="data/dbSNPs/b147/All_20160601.vcf.gz",
         caddsnv="data/pathogenicityScores/cadd_exon_snv.v1.3.tsv.gz",
         caddindel="data/pathogenicityScores/cadd_exon_indel.v1.3.tsv.gz",
         ref="data/referenceGenome/data/human_g1k_v37.fasta"
@@ -90,7 +89,7 @@ rule json:
         vcf_index="{output}/vcfs/annotated_vcfs/{sample}_annotated.vcf.gz.tbi",
         omim="data/omim/genemap2.txt",
         json="{output}/jsons/phenomized/{sample}.json",
-        simulator="3_simulation/simulator/pedia-simulator-0.0.3-SNAPSHOT-jar-with-dependencies.jar"
+        simulator="3_simulation/simulator/pedia-simulator-0.0.4-SNAPSHOT-jar-with-dependencies.jar"
     output:
         "{output}/jsons/test/{sample}.json"
     log: "{output}/logs/{sample}/extend_json.log"
